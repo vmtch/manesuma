@@ -15,7 +15,11 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "rm": "rm -rf docs",
+    "mv": "mv build docs",
+    "git": "git add . && git commit && git push origin master",
+    "deploy": "rm -rf docs && npm run build && mv build docs"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +38,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "https://vmtch.github.io/manesuma/"
 }
