@@ -1,0 +1,8 @@
+services:
+  node:
+    build: .
+    volumes:
+      - ./:/usr/src/app
+    command: sh -c 'cd manesuma && yarn start'
+    ports:
+      - '3000:3000'
