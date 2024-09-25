@@ -19,7 +19,7 @@
     "rm": "rm -rf docs",
     "mv": "mv build docs",
     "git": "git add . && git commit && git push origin master",
-    "deploy": "npm run rm && npm run build && npm run mv && npm run git"
+    "deploy": "rm -rf docs && npm run build && mv build docs"
   },
   "eslintConfig": {
     "extends": [
