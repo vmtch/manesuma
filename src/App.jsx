@@ -55,9 +55,12 @@ function App() {
     if ("Notification" in window) {
       if (Notification.permission === "granted") {
         console.log("通知の発行");
-        new Notification("休憩時間の超過", {
-          body: "休憩時間が過ぎました", // ここにメッセージ本文          
-        });
+        setTimeout(() => {
+          new Notification("休憩時間の超過", {
+            body: "休憩時間が過ぎました", // ここにメッセージ本文          
+          });
+        }, 10000);
+        
       } 
     } else {
       console.log("このデバイスではブラウザ通知がサポートされていません");
@@ -67,7 +70,6 @@ function App() {
   return (
     <div>
       <button onClick={showPermissionRequest}>通知の権限</button>
-      <button onClick={showNotification}>通知を表示</button>
       <button onClick={issueNotification}>通知を発行</button>
       {isVisible && (
         <Popup
