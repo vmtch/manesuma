@@ -1,12 +1,55 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+
+function Notification({ message, onClose }) {
+  return (
+    <div style={styles.notification}>
+      {message}
+      <button onClick={onClose} style={styles.button}>
+        閉じる
+      </button>
+    </div>
+  );
+}
+
+const styles = {
+  notification: {
+    position: "fixed",
+    bottom: "20px",
+    right: "20px",
+    backgroundColor: "#444",
+    color: "#fff",
+    padding: "10px",
+    borderRadius: "5px",
+  },
+  button: {
+    marginLeft: "10px",
+    backgroundColor: "#888",
+    border: "none",
+    color: "#fff",
+    cursor: "pointer",
+  },
+};
 
 function App() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const showNotification = () => {
+    setIsVisible(true);
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 3000); // 3秒後に自動で閉じる
+  };
+
   return (
-    <>
-      <h1>マネスマ</h1>
-      <h2>あなたのスマホ依存を矯正します．</h2>
-    </>
+    <div>
+      <button onClick={showNotification}>通知を表示</button>
+      {isVisible && (
+        <Notification
+          message="ここに通知を表示します"
+          onClose={() => setIsVisible(false)}
+        />
+      )}
+    </div>
   );
 }
 
