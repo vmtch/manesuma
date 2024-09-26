@@ -55,22 +55,12 @@ function App() {
     if ("Notification" in window) {
       if (Notification.permission === "granted") {
         console.log("通知の発行");
-        new Notification("test", {
-          body: "test", // ここにメッセージ本文
-          
+        new Notification("休憩時間の超過", {
+          body: "休憩時間が過ぎました", // ここにメッセージ本文          
         });
-      } else if (Notification.permission !== "denied") {
-        Notification.requestPermission().then((permission) => {
-          if (permission === "granted") {
-            new Notification("テスト", {
-              body: "テストです", // ここにメッセージ本文
-              icon: "https://via.placeholder.com/100", // アイコンも追加可能
-            });
-          }
-        });
-      }
+      } 
     } else {
-      alert("このデバイスではブラウザ通知がサポートされていません");
+      console.log("このデバイスではブラウザ通知がサポートされていません");
     }
   };
 
