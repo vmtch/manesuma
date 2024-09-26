@@ -50,10 +50,35 @@ function App() {
     });
   };
 
+  const issueNotification = () => {
+    // Notification API が使用できるか確認
+    if ("Notification" in window) {
+      if (Notification.permission === "granted") {
+        console.log("通知の発行");
+        new Notification("test", {
+          body: "test", // ここにメッセージ本文
+          
+        });
+      } else if (Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            new Notification("テスト", {
+              body: "テストです", // ここにメッセージ本文
+              icon: "https://via.placeholder.com/100", // アイコンも追加可能
+            });
+          }
+        });
+      }
+    } else {
+      alert("このデバイスではブラウザ通知がサポートされていません");
+    }
+  };
+
   return (
     <div>
       <button onClick={showPermissionRequest}>通知の権限</button>
       <button onClick={showNotification}>通知を表示</button>
+      <button onClick={issueNotification}>通知を発行</button>
       {isVisible && (
         <Popup
           message="ここに通知を表示します"
