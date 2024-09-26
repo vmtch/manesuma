@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Notification({ message, onClose }) {
+function Popup({ message, onClose }) {
   return (
     <div style={styles.notification}>
       {message}
@@ -44,11 +44,18 @@ function App() {
     }, closeTime); // 3秒後に自動で閉じる
   };
 
+  const showPermissionRequest = () => {
+    Notification.requestPermission().then((permission) => {
+      console.log(permission);
+    });
+  };
+
   return (
     <div>
+      <button onClick={showPermissionRequest}>通知の権限</button>
       <button onClick={showNotification}>通知を表示</button>
       {isVisible && (
-        <Notification
+        <Popup
           message="ここに通知を表示します"
           onClose={() => setIsVisible(false)}
         />
