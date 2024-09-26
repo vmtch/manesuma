@@ -34,10 +34,14 @@ function App() {
   const [isVisible, setIsVisible] = useState(false);
 
   const showNotification = () => {
-    setIsVisible(true);
+    let popupTime = 30000;
+    let closeTime = popupTime + 3000;
+    setTimeout(() => {
+      setIsVisible(true);
+    }, popupTime);
     setTimeout(() => {
       setIsVisible(false);
-    }, 3000); // 3秒後に自動で閉じる
+    }, closeTime); // 3秒後に自動で閉じる
   };
 
   return (
