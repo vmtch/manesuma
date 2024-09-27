@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 
 function Popup({ message, onClose }) {
   return (
@@ -35,6 +35,30 @@ const styles = {
 function App() {
   const [isVisible, setIsVisible] = useState(false);
   const [isSmartPhoneMode, setIsSmartPhoneMode] = useState(false);
+  const [milliseconds, setMilliseconds] = useState(0);
+  const [startTime, setStartTime] = useState(null); // スマホモード開始時の時間
+
+  useEffect(() => {
+    let interval = null;
+
+    if (isSmartPhoneMode) {
+      // スマホモードがオンになった時点の標準時を記録
+      const now = Date.now();
+      setStartTime(now);
+
+      // インターバルを設定して経過時間を計算
+      interval = setInterval(() => {
+        const currentTime = Date.now();
+        setMilliseconds(currentTime - now); // 現在時刻 - 開始時刻
+      }, 1); // 1ミリ秒ごとに更新
+    } else {
+      // スマホモードがオフになったらタイマーを停止
+      clearInterval(interval);
+    }
+
+    // コンポーネントのクリーンアップ
+    return () => clearInterval(interval);
+  }, [isSmartPhoneMode]);
 
   const showNotification = () => {
     let popupTime = 30000;
@@ -83,6 +107,10 @@ function App() {
       <button onClick={showPermissionRequest}>通知の権限</button>
       <button onClick={issueNotification}>通知を発行</button>
       <button onClick={toggleSmartPhoneMode}>スマホモード</button>
+      <div>
+        <h2>スマホモード: {isSmartPhoneMode ? "オン" : "オフ"}</h2>
+        <h2>経過時間: {milliseconds}ミリ秒</h2>
+      </div>
       {isVisible && (
         <Popup
           message="ここに通知を表示します"
