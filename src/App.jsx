@@ -166,6 +166,7 @@ function App() {
           type="number"
           onChange={handleBreakTimeChange}
           placeholder="休憩時間を入力"
+          disabled={isConcentrate}
         />
       </div>
 
