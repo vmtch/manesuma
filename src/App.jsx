@@ -96,7 +96,9 @@ function App() {
   };
 
   const toggleSmartPhoneMode = () => {
-    if (!isConcentrate) return;
+    if (!isConcentrate) {
+      return;
+    }
     if(isSmartPhoneMode)
       setIsSmartPhoneMode(false);
     else
@@ -108,6 +110,7 @@ function App() {
       setIsConcentrate(false);
     else
       setIsConcentrate(true);
+      setIsSmartPhoneMode(false);
   };
 
   return (
