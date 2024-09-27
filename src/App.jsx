@@ -38,6 +38,7 @@ function App() {
   const [isConcentrate, setIsConcentrate] = useState(false);
   const [milliseconds, setMilliseconds] = useState(0);
   const [isNotificationSent, setIsNotificationSent] = useState(false);
+  const [breakTime, setBreakTime] = useState(0); 
 
   useEffect(() => {
     let interval = null;
@@ -67,7 +68,7 @@ function App() {
   }, [isConcentrate]);
 
   useEffect(() => {
-    if(milliseconds > 20000 && !isNotificationSent){
+    if(milliseconds > breakTime && !isNotificationSent){
       issueNotification();
       setIsNotificationSent(true);
     }
@@ -124,6 +125,11 @@ function App() {
       setIsSmartPhoneMode(false);
   };
 
+  const handleBreakTimeChange = (e) => {
+    const time = parseInt(e.target.value, 10);
+    setBreakTime(time * 1000); // 秒をミリ秒に変換
+  };
+
   return (
     <div>
       <button onClick={showPermissionRequest}>通知の権限</button>
@@ -136,6 +142,14 @@ function App() {
       <div>
         <h2>スマホモード: {isSmartPhoneMode ? "オン" : "オフ"}</h2>
         <h2>経過時間: {milliseconds}ミリ秒</h2>
+      </div>
+      <div>
+        <label>休憩時間 (秒): </label>
+        <input
+          type="number"
+          onChange={handleBreakTimeChange}
+          placeholder="休憩時間を入力"
+        />
       </div>
       {isVisible && (
         <Popup
