@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from "react";
+import "./App.css";
 
 function Popup({ message, onClose }) {
   return (
@@ -131,27 +132,43 @@ function App() {
   };
 
   return (
-    <div>
-      <button onClick={showPermissionRequest}>通知の権限</button>
-      <button onClick={issueNotification}>通知を発行</button>
-      <button onClick={toggleSmartPhoneMode}>スマホモード</button>
-      <button onClick={toggleConcentrate}>集中モード</button>
+    <div style={{ textAlign: "center", padding: "20px" }}>
+      {/* 通知の権限ボタン（ベルマーク付き） */}
+      <button onClick={showPermissionRequest} className="bellButton">
+        通知の権限
+      </button>
+
+      {/* 集中モードボタン */}
+      <button
+        onClick={toggleConcentrate}
+        className={`centerButton ${isConcentrate ? "centerButtonActive" : ""}`}
+      >
+        集中モード: {isConcentrate ? "オン" : "オフ"}
+      </button>
+
+      {/* スマホモードボタン */}
+      <button
+        onClick={toggleSmartPhoneMode}
+        className={`smartphoneButton ${
+          isSmartPhoneMode ? "smartphoneButtonActive" : ""
+        }`}
+      >
+        スマホモード: {isSmartPhoneMode ? "オン" : "オフ"}
+      </button>
+
       <div>
-        <h2>集中モード: {isConcentrate ? "オン" : "オフ"}</h2>
-      </div>
-      <div>
-        <h2>スマホモード: {isSmartPhoneMode ? "オン" : "オフ"}</h2>
         <h2>経過時間: {milliseconds}ミリ秒</h2>
       </div>
+
       <div>
         <label>休憩時間 (秒): </label>
         <input
           type="number"
           onChange={handleBreakTimeChange}
           placeholder="休憩時間を入力"
-          disabled = {isConcentrate}
         />
       </div>
+
       {isVisible && (
         <Popup
           message="ここに通知を表示します"

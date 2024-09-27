@@ -36,3 +36,97 @@
     transform: rotate(360deg);
   }
 }
+.concentrateModeButton {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background: lightgreen;
+  border: none;
+}
+
+
+/* 通知ポップアップのスタイル */
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #444;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+/* ボタン共通のスタイル */
+.button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  margin: 5px;
+}
+
+/* 通知の権限ボタン */
+.bellButton {
+  display: flex;
+  align-items: center;
+  background-color: #28a745;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+/* 通知の権限ボタンのアイコン */
+.bellIcon {
+  margin-right: 10px;
+}
+
+/* 集中モードボタン */
+.centerButton {
+  display: block;
+  margin: 40px auto;
+  padding: 20px 40px;
+  font-size: 24px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+  border-radius: 50%;
+  aspect-ratio: 1/1;
+}
+
+/* 集中モードがアクティブなときのスタイル */
+.centerButtonActive {
+  background-color: #dc3545; /* 赤色に変化（集中モードオン） */
+}
+
+/* スマホモードボタン */
+.smartphoneButton {
+  display: block;
+  margin: 40px auto;
+  padding: 15px 30px;
+  font-size: 20px;
+  background-color: #17a2b8;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+/* スマホモードがアクティブなときのスタイル */
+.smartphoneButtonActive {
+  background-color: #ffc107; /* 黄色に変化（スマホモードオン） */
+}
