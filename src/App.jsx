@@ -157,7 +157,7 @@ function App() {
       </button>
 
       <div>
-        <h2>経過時間: {milliseconds}ミリ秒</h2>
+        <h2>残りスマホタイム {breakTime - milliseconds > 0 ? (breakTime - milliseconds) / 1000 + "秒": "なし"}</h2>
       </div>
 
       <div>
