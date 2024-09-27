@@ -11,6 +11,8 @@ function Popup({ message, onClose }) {
   );
 }
 
+const sleep = waitTime => new Promise( resolve => setTimeout(resolve, waitTime) );
+
 const styles = {
   notification: {
     position: "fixed",
@@ -56,15 +58,11 @@ function App() {
       if (Notification.permission === "granted") {
         console
         .log("通知の発行");
-        setTimeout(async () => {
-          console.log("テスト1");
-          const registration = await navigator.serviceWorker.getRegistration();
-          if (registration) {
-            console.log("テスト2");
-            await registration.showNotification("休憩時間の超過", {body:"休憩時間が過ぎました"});
-          }
-        }, 5000);
-        
+        await sleep(5000);
+        const registration = await navigator.serviceWorker.getRegistration();
+        if (registration) {
+          await registration.showNotification("休憩時間の超過", {body: "休憩時間が過ぎました"});
+        }
       } 
     } else {
       console.log("このデバイスではブラウザ通知がサポートされていません");
