@@ -35,6 +35,7 @@ const styles = {
 function App() {
   const [isVisible, setIsVisible] = useState(false);
   const [isSmartPhoneMode, setIsSmartPhoneMode] = useState(false);
+  const [isConcentrate, setIsConcentrate] = useState(false);
   const [milliseconds, setMilliseconds] = useState(0);
   const [startTime, setStartTime] = useState(null); // スマホモード開始時の時間
 
@@ -102,11 +103,20 @@ function App() {
     console.log("isSmartPhoneMode is " + isSmartPhoneMode);
   };
 
+  const toggleConcentrate = () => {
+    if(isConcentrate)
+      setIsConcentrate(false);
+    else
+      setIsConcentrate(true);
+    console.log("isConcentrate is " + isConcentrate);
+  };
+
   return (
     <div>
       <button onClick={showPermissionRequest}>通知の権限</button>
       <button onClick={issueNotification}>通知を発行</button>
       <button onClick={toggleSmartPhoneMode}>スマホモード</button>
+      <button onClick={toggleConcentrate}>集中モード</button>
       <div>
         <h2>スマホモード: {isSmartPhoneMode ? "オン" : "オフ"}</h2>
         <h2>経過時間: {milliseconds}ミリ秒</h2>
