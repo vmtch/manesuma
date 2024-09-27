@@ -56,17 +56,23 @@ function App() {
     })();
   };
 
-  const issueNotification = () => {
+  const issueNotification = async () => {
     // Notification API が使用できるか確認
     if ("Notification" in window) {
       if (Notification.permission === "granted") {
         console
         .log("通知の発行");
-        setTimeout(() => {
-          new Notification("休憩時間の超過", {
-            body: "休憩時間が過ぎました", // ここにメッセージ本文          
-          });
-        }, 10000);
+        setTimeout(async () => {
+          console.log("テスト1");
+          const registration = await navigator.serviceWorker.getRegistration();
+          if (registration) {
+            console.log("テスト2");
+            await registration.showNotification("休憩時間の超過", {body:"休憩時間が過ぎました"});
+          }
+          // new Notification("休憩時間の超過", {
+          //   body: "休憩時間が過ぎました", // ここにメッセージ本文          
+          // });
+        }, 5000);
         
       } 
     } else {
