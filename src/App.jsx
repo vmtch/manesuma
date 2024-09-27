@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import OneSignal from "react-onesignal";
 
 function Popup({ message, onClose }) {
   return (
@@ -48,13 +49,19 @@ function App() {
     Notification.requestPermission().then((permission) => {
       console.log(permission);
     });
+    (async () => {
+      OneSignal.init({
+        appId: '44013a26-2b15-4552-9180-d794c781b6c9',
+      })
+    })();
   };
 
   const issueNotification = () => {
     // Notification API が使用できるか確認
     if ("Notification" in window) {
       if (Notification.permission === "granted") {
-        console.log("通知の発行");
+        console
+        .log("通知の発行");
         setTimeout(() => {
           new Notification("休憩時間の超過", {
             body: "休憩時間が過ぎました", // ここにメッセージ本文          
