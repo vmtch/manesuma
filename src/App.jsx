@@ -37,20 +37,17 @@ function App() {
   const [isSmartPhoneMode, setIsSmartPhoneMode] = useState(false);
   const [isConcentrate, setIsConcentrate] = useState(false);
   const [milliseconds, setMilliseconds] = useState(0);
-  const [startTime, setStartTime] = useState(null); // スマホモード開始時の時間
 
   useEffect(() => {
     let interval = null;
 
     if (isSmartPhoneMode) {
       // スマホモードがオンになった時点の標準時を記録
-      const now = Date.now();
-      setStartTime(now);
-
+      const startTime = Date.now();
       // インターバルを設定して経過時間を計算
       interval = setInterval(() => {
         const currentTime = Date.now();
-        setMilliseconds(currentTime - now); // 現在時刻 - 開始時刻
+        setMilliseconds(milliseconds + currentTime - startTime); // 現在時刻 - 開始時刻
       }, 1); // 1ミリ秒ごとに更新
     } else {
       // スマホモードがオフになったらタイマーを停止
@@ -60,6 +57,12 @@ function App() {
     // コンポーネントのクリーンアップ
     return () => clearInterval(interval);
   }, [isSmartPhoneMode]);
+
+  useEffect(() => {
+    if(!isConcentrate){
+      setMilliseconds(0);
+    }
+  }, [isConcentrate]);
 
   const showNotification = () => {
     let popupTime = 30000;
