@@ -96,11 +96,11 @@ function App() {
   };
 
   const toggleSmartPhoneMode = () => {
+    if (!isConcentrate) return;
     if(isSmartPhoneMode)
       setIsSmartPhoneMode(false);
     else
       setIsSmartPhoneMode(true);
-    console.log("isSmartPhoneMode is " + isSmartPhoneMode);
   };
 
   const toggleConcentrate = () => {
@@ -108,7 +108,6 @@ function App() {
       setIsConcentrate(false);
     else
       setIsConcentrate(true);
-    console.log("isConcentrate is " + isConcentrate);
   };
 
   return (
@@ -117,6 +116,9 @@ function App() {
       <button onClick={issueNotification}>通知を発行</button>
       <button onClick={toggleSmartPhoneMode}>スマホモード</button>
       <button onClick={toggleConcentrate}>集中モード</button>
+      <div>
+        <h2>集中モード: {isConcentrate ? "オン" : "オフ"}</h2>
+      </div>
       <div>
         <h2>スマホモード: {isSmartPhoneMode ? "オン" : "オフ"}</h2>
         <h2>経過時間: {milliseconds}ミリ秒</h2>
