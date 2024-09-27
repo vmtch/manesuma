@@ -37,6 +37,7 @@ function App() {
   const [isSmartPhoneMode, setIsSmartPhoneMode] = useState(false);
   const [isConcentrate, setIsConcentrate] = useState(false);
   const [milliseconds, setMilliseconds] = useState(0);
+  const [isNotificationSent, setIsNotificationSent] = useState(false);
 
   useEffect(() => {
     let interval = null;
@@ -48,7 +49,7 @@ function App() {
       interval = setInterval(() => {
         const currentTime = Date.now();
         setMilliseconds(milliseconds + currentTime - startTime); // 現在時刻 - 開始時刻
-      }, 1); // 1ミリ秒ごとに更新
+      }, 100); // 100ミリ秒ごとに更新
     } else {
       // スマホモードがオフになったらタイマーを停止
       clearInterval(interval);
@@ -61,8 +62,16 @@ function App() {
   useEffect(() => {
     if(!isConcentrate){
       setMilliseconds(0);
+      setIsNotificationSent(false);
     }
   }, [isConcentrate]);
+
+  useEffect(() => {
+    if(milliseconds > 20000 && !isNotificationSent){
+      issueNotification();
+      setIsNotificationSent(true);
+    }
+  }, [milliseconds]);
 
   const showNotification = () => {
     let popupTime = 30000;
@@ -85,9 +94,8 @@ function App() {
     // Notification API が使用できるか確認
     if ("Notification" in window) {
       if (Notification.permission === "granted") {
-        console
-        .log("通知の発行");
-        await sleep(5000);
+        console.log("通知の発行");
+        // await sleep(5000);
         const registration = await navigator.serviceWorker.getRegistration();
         if (registration) {
           await registration.showNotification("休憩時間の超過", {body: "休憩時間が過ぎました"});
