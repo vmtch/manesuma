@@ -34,6 +34,7 @@ const styles = {
 
 function App() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isSmartPhoneMode, setIsSmartPhoneMode] = useState(false);
 
   const showNotification = () => {
     let popupTime = 30000;
@@ -69,10 +70,19 @@ function App() {
     }
   };
 
+  const toggleSmartPhoneMode = () => {
+    if(isSmartPhoneMode)
+      setIsSmartPhoneMode(false);
+    else
+      setIsSmartPhoneMode(true);
+    console.log("isSmartPhoneMode is " + isSmartPhoneMode);
+  };
+
   return (
     <div>
       <button onClick={showPermissionRequest}>通知の権限</button>
       <button onClick={issueNotification}>通知を発行</button>
+      <button onClick={toggleSmartPhoneMode}>スマホモード</button>
       {isVisible && (
         <Popup
           message="ここに通知を表示します"
